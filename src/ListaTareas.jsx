@@ -1,17 +1,17 @@
-import { useState } from "react"
-import { Tarea } from "./Tarea"
+import { Tarea } from "./Tarea";
 
-export const ListaTareas = () => {
-    const [tareas, setTareas] = useState([])
-
-
+export const ListaTareas = ({ tareas }) => {
   return (
     <>
-        <ul>
-            {tareas.map((tarea) => {
-                <Tarea tarea={tarea}/>
-            })}
+      {tareas.length > 0 ? (
+        <ul className="list-unstyled">
+          {tareas.map((tarea, i) => (
+            <Tarea tarea={tarea} key={i} />
+          ))}
         </ul>
+      ) : (
+        <></>
+      )}
     </>
-  )
-}
+  );
+};
