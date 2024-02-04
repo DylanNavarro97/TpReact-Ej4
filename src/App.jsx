@@ -9,16 +9,21 @@ function App() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    setTareas([...tareas, tareaIngresada]);
-    setTareaIngresada("");
+    if (tareaIngresada.trim().length > 3){
+      setTareas([...tareas, tareaIngresada]);
+      setTareaIngresada("");
+    } else {
+      alert("Ingresa una tarea válida")
+    }
   };
 
   let handleChange = (e) => {
     setTareaIngresada(e.target.value);
   };
 
-  let handleClose = () => {
-
+  let handleClose = (tareas, tarea) => {
+    let tareasFiltradas = tareas.filter((nombre) => nombre !== tarea)
+    setTareas(tareasFiltradas)
   }
 
   return (
@@ -35,7 +40,7 @@ function App() {
             />
           </div>
 
-          <ListaTareas tareas={tareas}/>
+          <ListaTareas tareas={tareas} eliminar={handleClose}/>
         </section>
       </Container>
     </>
